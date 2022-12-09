@@ -24,6 +24,7 @@ data SchemaOptions = SchemaOptions
   , unwrapUnaryRecords :: Bool
     -- | Specifies how to encode constructors of a sum datatype.
   , sumEncoding :: Aeson.SumEncoding
+  , omitNothingFields :: Bool
   }
 
 -- | Default encoding @'SchemaOptions'@.
@@ -46,6 +47,7 @@ defaultSchemaOptions = SchemaOptions
   , allNullaryToStringTag = True
   , unwrapUnaryRecords = False
   , sumEncoding = Aeson.defaultTaggedObject
+  , omitNothingFields = Aeson.omitNothingFields Aeson.defaultOptions
   }
 
 -- | Convert 'Aeson.Options' to 'SchemaOptions'.
@@ -73,4 +75,5 @@ fromAesonOptions opts = defaultSchemaOptions
   , allNullaryToStringTag  = Aeson.allNullaryToStringTag  opts
   , unwrapUnaryRecords     = Aeson.unwrapUnaryRecords     opts
   , sumEncoding            = Aeson.sumEncoding            opts
+  , omitNothingFields      = Aeson.omitNothingFields      opts
   }
